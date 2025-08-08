@@ -7,6 +7,6 @@ public class Lista{
     public crearLista(int id, string Nombre, int IdUsu){
         idLista=id;
         nombre=Nombre;
-        idUsu=IdUsu
+        idUsu=IdUsu;
     }
 }

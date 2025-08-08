@@ -17,4 +17,10 @@ public class HomeController : Controller
     {
         return View();
     }
+    public IActionResult vistaUsuario(){
+
+        Usuario usu=HttpContext.Session.GetString("usuario");
+        ViewBag.nombre=usu.username;
+        ViewBag.tareas=BD.levantarTarea(usu);
+    }
 }

@@ -27,15 +27,16 @@ public static class BD
         List<Tarea> tarea=new List<Tarea>(); 
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            string query="SELECT * FROM tarea WHERE id_tarea IN (SELECT id_Tarea FROM tareaxUsuario WHERE id_usuario=@pidUsuario) AND estaborrada=0"
+            string query="SELECT * FROM tarea WHERE id_tarea IN (SELECT id_Tarea FROM tareaxUsuario WHERE id_usuario=@pidUsuario) AND estaborrada=0";
             tarea=connection.Query<Tarea>(query).ToList();
         }
+        return tarea;
     }
-    public static void eliminarTarea(int id_Tarea){
-        string query="UPDATE Tarea (estaBorrada) VALUES (1) WHERE id_tarea=@ptareaID";
+    public static void eliminarTarea(int id_Tarea,int id_usuario){
+        string query="UPDATE Tarea (estaBorrada) VALUES (1) WHERE id_tarea=@ptareaID AND @pidUsuario IN (SELECT id_usuario FROM Tarea WHERE id_tarea=@ptareaID)";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            connection.Execute(query, new {ptareaID=id_Tarea});
+            connection.Execute(query, new {ptareaID=id_Tarea, pidUsuario=id_usuario});
         }
     }
       public static void terminarTarea(int id_Tarea){
@@ -48,18 +49,18 @@ public static class BD
 
     public static void compartirTarea(Usuario usuarioNuevo, Usuario UsuarioOg, int id_Tarea)
     {
-        string query = "INSERT INTO tareaxUsuario (id_tarea,id_Usuario) VALUES (@pidTarea,@pid_usuario) WHERE (SELECT id_usuario FROM Tarea WHERE id_tarea=@pidTarea)IN@pid_Og";
+        string query = "INSERT INTO tareaxUsuario (id_tarea,id_Usuario) VALUES (@pidTarea,@pid_usuario) WHERE @pid_Og IN (SELECT id_usuario FROM Tarea WHERE id_tarea=@pidTarea)";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Execute(query, new {pidTarea=id_Tarea,pid_usuario=usuarioNuevo.idUsuario,pid_Og=UsuarioOg.idUsuario});
         }
     }
 
-    public static void agregarALista(int id_Tarea,Lista lista){
+    public static void agregarALista(int id_Tarea,int lista){
         string query="UPDATE Tarea (id_lista) VALUES (@pidLista) WHERE id_tarea=@ptareaID";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            connection.Execute(query, new {ptareaID=id_Tarea,pidLista=lista.idLista});
+            connection.Execute(query, new {ptareaID=id_Tarea,pidLista=lista});
         }
     }
 }

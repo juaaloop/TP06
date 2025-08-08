@@ -1,12 +1,12 @@
 public class Tarea
 {
 
-    public int idTarea;
-    public int id_usuario;
-    public string nombre;
-    public bool estaFinalizada;
-    public bool estaBorrada;
-    public string contenido;
+    public int idTarea{get;set;}
+    public int id_usuario{get;set;}
+    public string nombre{get;set;}
+    public bool estaFinalizada{get;set;}
+    public bool estaBorrada{get;set;}
+    public string contenido{get;set;}
 
 
     public crearTarea(string Id_usuario, string Nombre,bool final, bool borrado, string contenidos){
