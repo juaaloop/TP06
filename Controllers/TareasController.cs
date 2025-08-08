@@ -14,7 +14,7 @@ public class TareasController : Controller
     }
     public IActionResult agregarTarea(string nombre,string contenido)
     {
-        Usuario usu=HttpContext.Session.GetString("usuario");
+        Usuario usu=Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
         Tarea tarea = new Tarea();
         tarea.crearTarea(usu.idUsuario,nombre,0,0,contenido);
         BD.agregarTarea(tarea);
@@ -24,7 +24,7 @@ public class TareasController : Controller
 
     public IActionResult modificarTarea(Tarea tarea,string contenido)
     {
-        Usuario usu=HttpContext.Session.GetString("usuario");
+        Usuario usu=Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
         tarea.contenido=contenido;
         BD.modificarTarea(tarea,usu.idUsuario);
         return RedirectToAction("vistaUsuario","Home");
@@ -32,7 +32,7 @@ public class TareasController : Controller
     
     public IActionResult eliminarTarea(Tarea tarea)
     {
-        Usuario usu=HttpContext.Session.GetString("usuario");
+        Usuario usu=Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
         BD.eliminarTarea(tarea.idTarea,usu.idUsuario);
         return RedirectToAction("vistaUsuario","Home");
     }
@@ -43,7 +43,7 @@ public class TareasController : Controller
     }
     public IActionResult compartirTarea(Usuario nuevo, Tarea tarea)
     {
-        Usuario usu=HttpContext.Session.GetString("usuario");
+        Usuario usu=Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
         BD.compartirTarea(nuevo.idUsuario, usu.idUsuario, tarea.idTarea);
         return RedirectToAction("vistaUsuario","Home");
     }

@@ -1,0 +1,9 @@
+C:\Users\49193480\Downloads\TP06\obj\Debug\net8.0\Downloads.csproj.AssemblyReference.cache
+C:\Users\49193480\Downloads\TP06\obj\Debug\net8.0\Downloads.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\49193480\Downloads\TP06\obj\Debug\net8.0\Downloads.AssemblyInfoInputs.cache
+C:\Users\49193480\Downloads\TP06\obj\Debug\net8.0\Downloads.AssemblyInfo.cs
+C:\Users\49193480\Downloads\TP06\obj\Debug\net8.0\Downloads.csproj.CoreCompileInputs.cache
+C:\Users\49193480\Downloads\TP06\obj\Debug\net8.0\Downloads.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\49193480\Downloads\TP06\obj\Debug\net8.0\Downloads.RazorAssemblyInfo.cache
+C:\Users\49193480\Downloads\TP06\obj\Debug\net8.0\Downloads.RazorAssemblyInfo.cs
+C:\Users\49193480\Downloads\TP06\obj\Debug\net8.0\Downloads.sourcelink.json

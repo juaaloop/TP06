@@ -4,7 +4,7 @@ public class Lista{
     public string nombre{get;set;}
     public int idUsu {get;set;}
 
-    public crearLista(int id, string Nombre, int IdUsu){
+    public void crearLista(int id, string Nombre, int IdUsu){
         idLista=id;
         nombre=Nombre;
         idUsu=IdUsu;

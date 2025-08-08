@@ -5,7 +5,7 @@ public class Usuario{
     public int idUsuario{get;set;}
     
     
-    public crearUsuario(string Nombre, string Password){
+    public void crearUsuario(string Nombre, string Password){
         nombre=Nombre;
         password=Password;
     }

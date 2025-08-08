@@ -29,7 +29,7 @@ public class UsuarioController : Controller
     }
     public IActionResult comprobarDatos(string nombreUsuarioNuevo, string password)
     {
-       Usuario usu = BD.obtenerUsuario(nombreUsuarioNuevo,encriptar.HashearPassword(password));
+       Usuario usu = BDUsu.obtenerUsuario(nombreUsuarioNuevo,encriptar.HashearPassword(password));
             if(usu != null){
                 HttpContext.Session.SetString("usuario", Objeto.ObjectToString(usu));
                 return RedirectToAction("vistaUsuario","Home");

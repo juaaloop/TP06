@@ -1,0 +1,9 @@
+@{
+    ViewData["Title"] = "Iniciar Sesión";
+}
+
+<form action='@Url.Action("comprobarDatos","Usuario")' method="post">
+ <p>Nombre de usuario:</p><input type="text" name="nombreUsuarioNuevo" required>
+ <p>Contraseña:</p><input type="password" name="password" required>
+<input type="submit" value="Iniciar Sesión">
+</form>

@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Registrarse";
+}
+<link rel="stylesheet" href="/css/style.css">
+    <header>
+       <h1>☆</h1> 
+    </header> 
+<body>
+    <section>
+@if(ViewBag.estado=="errorUsuario"){
+    <h2 class="error">el nombre de usuario ya esta siendo usado. Intente con otro nombre.</h2>
+}
+<form action='@Url.Action("registrarNuevo")' method="post">
+<p>Nombre de usuario:</p><input type="text" name="nombreUsuarioNuevo" required>
+<p>Contraseña:</p><input type="text" name="password" required>
+<input type="submit" value="Registrarse">
+</form>
+</section>
+<div>
+<a href='@Url.Action("iniciarSesion")' method="post" class="iniciarSesion">Iniciar Sesión</a>
+</div>
+
+
+
+
+</body>
+<footer></footer>

@@ -19,7 +19,7 @@ public class HomeController : Controller
     }
     public IActionResult vistaUsuario(){
 
-        Usuario usu=HttpContext.Session.GetString("usuario");
+        Usuario usu=Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
         ViewBag.nombre=usu.username;
         ViewBag.tareas=BD.levantarTarea(usu);
     }
