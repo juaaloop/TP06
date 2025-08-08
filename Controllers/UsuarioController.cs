@@ -50,9 +50,6 @@ public class UsuarioController : Controller
 
     public IActionResult registrarNuevo(string nombreUsuarioNuevo,string password)
     {
-        if(BDUsu.yaExiste(nombreUsuarioNuevo)){
-            return RedirectToAction("registrarse", new{ estado="errorUsuario"});
-        }else{
             Usuario usu=new Usuario();
             string passwordHasheada = encriptar.HashearPassword(password);
             usu.crearUsuario(nombreUsuarioNuevo, passwordHasheada);
