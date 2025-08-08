@@ -7,7 +7,7 @@ public static class BDUsu
     DataBase=TP06; Integrated Security=True; TrustServerCertificate=True;";
     public static void agregarUsuario(Usuario user)
     {
-        string query = "INSERT INTO Usuario (nombreUsuario, password) VALUES (@pnombreUsuario, @ppassword)";
+        string query = "EXEC agregarUsuario "@pnombreUsuario", "@ppassword"";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Execute(query, new { pnombreUsuario = user.username, ppassword = user.password });
@@ -23,16 +23,3 @@ public static class BDUsu
         }
         return usuario;
     }
-    public static bool yaExiste(string NombreUsuario)
-    {
-        Usuario usuario = null;
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-
-            string query = "SELECT * FROM Usuario WHERE nombreUsuario=@pnombreUsuario";
-            usuario = connection.QueryFirstOrDefault<Usuario>(query, new { pnombreUsuario = NombreUsuario });
-
-        }
-        return usuario != null;
-    }
-}
