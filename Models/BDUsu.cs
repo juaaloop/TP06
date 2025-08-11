@@ -5,12 +5,19 @@ public static class BDUsu
 
     public static string connectionString = @"Server=localhost\SQLEXPRESS01;
     DataBase=TP06; Integrated Security=True; TrustServerCertificate=True;";
-    public static void agregarUsuario(Usuario user)
+    public static bool agregarUsuario(Usuario user)
     {
-        string query = "EXEC agregarUsuario "@pnombreUsuario", "@ppassword"";
+        int id;
+        string query = "EXEC agregarUsuario @pnombreUsuario,@ppassword";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            connection.Execute(query, new { pnombreUsuario = user.username, ppassword = user.password });
+            id = connection.QueryFirstOrDefault<int>(query, new { pnombreUsuario = user.username, ppassword = user.password });
+
+        }
+        if(id>0){
+            return true;
+        }else{
+            return false;
         }
     }
     public static Usuario obtenerUsuario(string nombreUsuario, string password)
@@ -23,3 +30,4 @@ public static class BDUsu
         }
         return usuario;
     }
+}

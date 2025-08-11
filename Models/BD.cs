@@ -8,10 +8,16 @@ public static class BD
 
     public static void agregarTarea(Tarea tarea)
     {
-        string query = "INSERT INTO Tarea (nombre, id_usuarioog, fechaCreacion, estaFinalizada, estaBorrada, contenido) VALUES (@pnombre,@pid_usuario, @pfechaCreacion, @pestaFinalizada, @pestaBorrada, @pcontenido)";
+        int id;
+        string query = "EXEC agregarTarea @pnombre, @pid_usuario,@pcontenido";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            connection.Execute(query, new { pnombre = tarea.nombre, pid_usuario=tarea.id_usuario, pfechaCreacion = DateTime.Today, pestaFinalizada= 0, pestaBorrada=0, pcontenido= tarea.contenido });
+            id = connection.QueryFirstOrDefault<int>(query, new {pnombre = tarea.nombre, pid_usuario=tarea.id_usuario, pcontenido= tarea.contenido });
+        } 
+        string query2 = "EXEC agregarTareayUser(@pidTarea, @pid_usuario)";
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Execute(query, new { pidTarea=id, pid_usuario=tarea.id_usuario});
         }
     }
     public static void modificarTarea(Tarea tarea, int idUsuario)
@@ -47,12 +53,12 @@ public static class BD
         }
     }
 
-    public static void compartirTarea(Usuario usuarioNuevo, Usuario UsuarioOg, int id_Tarea)
+    public static void compartirTarea(int usuarioNuevo, int UsuarioOg, int id_Tarea)
     {
         string query = "INSERT INTO tareaxUsuario (id_tarea,id_Usuario) VALUES (@pidTarea,@pid_usuario) WHERE @pid_Og IN (SELECT id_usuario FROM Tarea WHERE id_tarea=@pidTarea)";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            connection.Execute(query, new {pidTarea=id_Tarea,pid_usuario=usuarioNuevo.idUsuario,pid_Og=UsuarioOg.idUsuario});
+            connection.Execute(query, new {pidTarea=id_Tarea,pid_usuario=usuarioNuevo,pid_Og=UsuarioOg});
         }
     }
 

@@ -16,7 +16,7 @@ public class TareasController : Controller
     {
         Usuario usu=Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
         Tarea tarea = new Tarea();
-        tarea.crearTarea(usu.idUsuario,nombre,0,0,contenido);
+        tarea.crearTarea(usu.idUsuario,nombre,contenido);
         BD.agregarTarea(tarea);
         //Form arriba del resto de las cosas 
         return RedirectToAction("vistaUsuario","Home");
@@ -47,10 +47,10 @@ public class TareasController : Controller
         BD.compartirTarea(nuevo.idUsuario, usu.idUsuario, tarea.idTarea);
         return RedirectToAction("vistaUsuario","Home");
     }
-    public static void agregarALista(Tarea tarea, Lista lista)
+    public IActionResult agregarALista(Tarea tarea, Lista lista)
     {
         BD.agregarALista(tarea.idTarea,lista.idLista);
-        return RedirectToAction("vistaUsuario","Home");
+       return RedirectToAction("vistaUsuario","home");
 
     }
 }

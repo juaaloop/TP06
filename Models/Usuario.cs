@@ -6,7 +6,7 @@ public class Usuario{
     
     
     public void crearUsuario(string Nombre, string Password){
-        nombre=Nombre;
+        username=Nombre;
         password=Password;
     }
      public void agregarID(int id){

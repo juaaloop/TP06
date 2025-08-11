@@ -17,10 +17,16 @@ public class HomeController : Controller
     {
         return View();
     }
+
+    public IActionResult iniciarSesion(){
+        return View();
+    }
     public IActionResult vistaUsuario(){
 
         Usuario usu=Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
         ViewBag.nombre=usu.username;
         ViewBag.tareas=BD.levantarTarea(usu);
+
+        return View();
     }
 }
