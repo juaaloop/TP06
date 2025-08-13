@@ -21,6 +21,11 @@ public class HomeController : Controller
     public IActionResult iniciarSesion(){
         return View();
     }
+
+    public IActionResult registrarse(){
+
+        return View();
+    }
     public IActionResult vistaUsuario(){
 
         Usuario usu=Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));

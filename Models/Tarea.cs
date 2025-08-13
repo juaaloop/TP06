@@ -4,7 +4,9 @@ public class Tarea
     public int idTarea{get;set;}
     public int id_usuario{get;set;}
     public string nombre{get;set;}
+    public DateTime fechaCreacion{get;set;}
     public string contenido{get;set;}
+    
 
 
     public void crearTarea(int Id_usuario, string Nombre, string contenidos){

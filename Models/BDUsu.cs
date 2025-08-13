@@ -3,7 +3,7 @@ using Dapper;
 public static class BDUsu
 {
 
-    public static string connectionString = @"Server=localhost\SQLEXPRESS01;
+    public static string connectionString = @"Server=localhost;
     DataBase=TP06; Integrated Security=True; TrustServerCertificate=True;";
     public static bool agregarUsuario(Usuario user)
     {
@@ -19,6 +19,7 @@ public static class BDUsu
         }else{
             return false;
         }
+        //REVISAR QUE DEVUELVE
     }
     public static Usuario obtenerUsuario(string nombreUsuario, string password)
     {
@@ -29,5 +30,15 @@ public static class BDUsu
             usuario = connection.QueryFirstOrDefault<Usuario>(query, new { pnombreUsuario = nombreUsuario, ppassword = password });
         }
         return usuario;
+    }
+    public static int obtenerUsuarioId(string nombreUsuario)
+    {
+        int id;
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            string query = "SELECT id_usuario FROM Usuario WHERE nombreUsuario=@pnombreUsuario";
+            id = connection.QueryFirstOrDefault<int>(query, new { pnombreUsuario = nombreUsuario});
+        }
+        return id;
     }
 }

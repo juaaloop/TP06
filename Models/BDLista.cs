@@ -3,7 +3,7 @@ using Dapper;
 public static class BDLista
 {
 
-    public static string connectionString = @"Server=localhost\SQLEXPRESS01;
+    public static string connectionString = @"Server=localhost;
     DataBase=TP06; Integrated Security=True; TrustServerCertificate=True;";
 
     public static void agregarLista(Lista lista)

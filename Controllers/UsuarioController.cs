@@ -25,7 +25,7 @@ public class UsuarioController : Controller
             return RedirectToAction("vistaUsuario");
             }
 
-        return View();
+        return RedirectToAction("iniciarSesion","Home");
     }
     public IActionResult comprobarDatos(string nombreUsuarioNuevo, string password)
     {
@@ -53,8 +53,14 @@ public class UsuarioController : Controller
             Usuario usu=new Usuario();
             string passwordHasheada = encriptar.HashearPassword(password);
             usu.crearUsuario(nombreUsuarioNuevo, passwordHasheada);
-            BDUsu.agregarUsuario(usu);
-            return RedirectToAction("registrarse",new{estado="funciono"});
+            bool funciono=BDUsu.agregarUsuario(usu);
+            if(funciono){
+                return RedirectToAction("registrarse","Home",new{estado="funciono"});
+            }else{
+                return RedirectToAction("registrarse","Home",new{estado="Nofunciono"});
+
+            }
+           
         }
     }
 

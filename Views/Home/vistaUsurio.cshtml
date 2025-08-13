@@ -2,3 +2,20 @@
     ViewData["Title"] = "Home";
 }
 
+@ViewBag.nombre
+
+@{
+    foreach(Tarea tarea in ViewBag.tareas){
+        <div>
+        <h1>@tarea.nombre</h1>
+        <h3>@tarea.contenido</h3>
+        <p>@tarea.fechaCreacion</p>
+        <div class="opciones">
+        </div>
+    }
+}
+<form action='@Url.Action("agregarTarea")' method="post">
+<p>Nombre:</p><input type="text" name="nombre" required>
+<p>Contenido:</p><input type="text" name="contenido" required>
+<input type="submit" value="Registrarse">
+</form>
