@@ -30,22 +30,26 @@ public class TareasController : Controller
         return RedirectToAction("vistaUsuario","Home");
     }
     
-    public IActionResult eliminarTarea(Tarea tarea)
+    public IActionResult eliminarTarea(int idTarea)
     {
         Usuario usu=Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
-        BD.eliminarTarea(tarea.idTarea,usu.idUsuario);
+        BD.eliminarTarea(idTarea,usu.idUsuario);
         return RedirectToAction("vistaUsuario","Home");
     }
-    public IActionResult terminarTarea(Tarea tarea)
+    public IActionResult terminarTarea(int idTarea)
     {
-        BD.terminarTarea(tarea.idTarea);
+        BD.terminarTarea(idTarea);
         return RedirectToAction("vistaUsuario","Home");
     }
-    public IActionResult compartirTarea(Usuario nuevo, Tarea tarea)
+    public IActionResult compartirTarea(List<int> nuevos, int idTarea)
     {
         Usuario usu=Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
-        BD.compartirTarea(nuevo.idUsuario, usu.idUsuario, tarea.idTarea);
-        return RedirectToAction("vistaUsuario","Home");
+        foreach (int nuevo in nuevos)
+        {
+            BD.compartirTarea(nuevo, usu.idUsuario, idTarea);
+      
+        }
+          return RedirectToAction("vistaUsuario","Home");
     }
     public IActionResult agregarALista(Tarea tarea, Lista lista)
     {

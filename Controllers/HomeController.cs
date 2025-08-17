@@ -30,6 +30,7 @@ public class HomeController : Controller
 
         Usuario usu=Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
         ViewBag.nombre=usu.username;
+        ViewBag.otrosUsuarios = BDUsu.levantarUsuarios(usu);
         ViewBag.tareas=BD.levantarTarea(usu);
 
         return View();

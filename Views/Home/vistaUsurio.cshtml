@@ -4,17 +4,32 @@
 
 @ViewBag.nombre
 
-@{
-    foreach(Tarea tarea in ViewBag.tareas){
+@{foreach(Tarea tarea in ViewBag.tareas){
         <div>
         <h1>@tarea.nombre</h1>
         <h3>@tarea.contenido</h3>
         <p>@tarea.fechaCreacion</p>
         <div class="opciones">
+            <form action='@Url.Action("eliminarTarea","Tareas")' method="post">
+                <input type="hidden" name="id" value="@tarea.idTarea">
+                <input type="submit" value="Eliminar">
+            </form>
+             <form action='@Url.Action("terminarTarea","Tareas")' method="post">
+                <input type="hidden" name="id" value="@tarea.idTarea">
+                <input type="submit" value="Terminar">
+            </form>
+            <form action='@Url.Action("terminarTarea","Tareas")' method="post">
+                @foreach(Usuario usuario in ViewBag.otrosUsuarios){
+                    <input type="checkbox" name=@usuario.username value="@usuario.idUsuario">
+                } 
+                <input type="submit" value="Terminar">
+            </form>
+        </div>
         </div>
     }
+
 }
-<form action='@Url.Action("agregarTarea")' method="post">
+<form action='@Url.Action("agregarTarea","Tareas")' method="post">
 <p>Nombre:</p><input type="text" name="nombre" required>
 <p>Contenido:</p><input type="text" name="contenido" required>
 <input type="submit" value="Registrarse">

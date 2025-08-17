@@ -14,9 +14,12 @@ public static class BDUsu
             id = connection.QueryFirstOrDefault<int>(query, new { pnombreUsuario = user.username, ppassword = user.password });
 
         }
-        if(id>0){
+        if (id > 0)
+        {
             return true;
-        }else{
+        }
+        else
+        {
             return false;
         }
         //REVISAR QUE DEVUELVE
@@ -37,8 +40,18 @@ public static class BDUsu
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             string query = "SELECT id_usuario FROM Usuario WHERE nombreUsuario=@pnombreUsuario";
-            id = connection.QueryFirstOrDefault<int>(query, new { pnombreUsuario = nombreUsuario});
+            id = connection.QueryFirstOrDefault<int>(query, new { pnombreUsuario = nombreUsuario });
         }
         return id;
+    }
+     public static List<Usuario> levantarUsuarios(Usuario usuario){
+        
+        List<Usuario> usu=new List<Usuario>(); 
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            string query="SELECT * FROM Usuario WHERE id_usuario IN (SELECT id_usuario FROM Usuario WHERE id_usuario!=@pidUsuario)";
+            usu=connection.Query<Usuario>(query, new{pidUsuario=usuario.idUsuario}).ToList();
+        }
+        return usu;
     }
 }

@@ -34,7 +34,7 @@ public static class BD
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             string query="SELECT * FROM tarea WHERE id_tarea IN (SELECT id_Tarea FROM tareaxUsuario WHERE id_usuario=@pidUsuario) AND estaborrada=0";
-            tarea=connection.Query<Tarea>(query).ToList();
+            tarea=connection.Query<Tarea>(query, new{pidUsuario=usuario.idUsuario}).ToList();
         }
         return tarea;
     }
