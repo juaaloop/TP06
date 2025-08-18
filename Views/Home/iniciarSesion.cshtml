@@ -3,9 +3,15 @@
 }
 <link rel="stylesheet" href="/css/style.css">
 
+<section class="sesion">
 <form action='@Url.Action("comprobarDatos","Usuario")' method="post">
  <p>Nombre de usuario:</p><input type="text" name="nombreUsuarioNuevo" required>
  <p>Contraseña:</p><input type="password" name="password" required>
 <input type="submit" value="Iniciar Sesión">
 </form>
- <a href='@Url.Action("registrarse", new{estado="invisible"})'>Registrate</a>
+</section>
+ <div class="otra">
+                <h4>¿No tenes usuario?</h4>
+                <a href='@Url.Action("registrarse", new{estado="invisible"})'>Registrate</a>
+</div>
+ 
