@@ -43,11 +43,14 @@ public static class BD
         }
         return tarea;
     }
-    public static void eliminarTarea(int id_Tarea,int id_usuario){
+    public static void eliminarTarea(int id_Tarea,int id_Usuario){
         string query="UPDATE Tarea SET estaBorrada=1 WHERE id_tarea=@ptareaID AND @pidUsuario=id_usuarioog";
+        Console.WriteLine(id_Tarea);
+                Console.WriteLine(id_Usuario);
+
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            connection.Execute(query, new {ptareaID=id_Tarea, pidUsuario=id_usuario});
+            connection.Execute(query, new { ptareaID = id_Tarea, pidUsuario = id_Usuario });
         }
     }
       public static void terminarTarea(int id_Tarea){
@@ -58,12 +61,13 @@ public static class BD
         }
     }
 
-    public static void compartirTarea(int usuarioNuevo, int UsuarioOg, int id_Tarea)
+    public static void compartirTarea(int usuarioNuevo, int id_Tarea)
     {
-        string query = "INSERT INTO tareaxUsuario (id_tarea,id_Usuario) VALUES (@pidTarea,@pid_usuario) WHERE @pid_Og IN (SELECT id_usuarioog FROM Tarea WHERE id_tarea=@pidTarea)";
+        string query = "EXEC agregarTareayUser @pidTarea, @pid_usuario";
+
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            connection.Execute(query, new {pidTarea=id_Tarea,pid_usuario=usuarioNuevo,pid_Og=UsuarioOg});
+            connection.Execute(query, new { pidTarea = id_Tarea, pid_usuario = usuarioNuevo });
         }
     }
 

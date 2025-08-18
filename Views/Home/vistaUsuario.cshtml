@@ -9,7 +9,11 @@
         <h1>@tarea.nombre</h1>
         <h3>@tarea.contenido</h3>
         <p>@tarea.fechaCreacion</p>
-        <p>@tarea.estaFinalizada</p>
+        @{if (@tarea.estaFinalizada){
+        
+            <p>Esta tarea ya ha sido finalizada</p>
+            }
+        }
         <div class="opciones">
             <form action='@Url.Action("eliminarTarea","Tareas")' method="post">
                 <input type="hidden" name="id_tarea" value=@tarea.id_tarea>
@@ -20,10 +24,15 @@
                 <input type="submit" value="Terminar">
             </form>
             <form action='@Url.Action("compartirTarea","Tareas")' method="post">
+                <p>Compartir con:</p>
                 @foreach(Usuario usuario in ViewBag.otrosUsuarios){
-                    <input type="checkbox" name=@usuario.username value="@usuario.id_Usuario">
+                    @usuario.username<input type="checkbox" name="nuevos" value="@usuario.id_Usuario">
                 } 
-                <input type="submit" value="Terminar">
+
+                <input type="hidden" name="id_tarea" value="@tarea.id_tarea">
+                <input type="hidden" name="id_usuarioog" value="@tarea.id_usuarioog">
+
+                <input type="submit" value="Terminar"/>
             </form>
         </div>
         </div>
@@ -35,3 +44,6 @@
 <p>Contenido:</p><input type="text" name="contenido" required>
 <input type="submit" value="Agregar">
 </form>
+  <form action='@Url.Action("cerrarSesion","Usuario")'>
+        <input type="submit" value="Cerrar Sesión">
+      </form>

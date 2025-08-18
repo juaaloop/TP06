@@ -43,14 +43,20 @@ public class TareasController : Controller
         return RedirectToAction("vistaUsuario", "Home");
     }
        [HttpPost]
-    public IActionResult compartirTarea(List<int> nuevos, int idTarea)
+    public IActionResult compartirTarea(List<int> nuevos, int id_tarea,int id_usuarioog)
     {
         Usuario usu = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
-        foreach (int nuevo in nuevos)
+        Console.WriteLine(id_usuarioog);
+        if (usu.id_Usuario == id_usuarioog)
         {
-            BD.compartirTarea(nuevo, usu.id_Usuario, idTarea);
+            foreach (int nuevo in nuevos)
+            {
+                Console.WriteLine(nuevo);
+                BD.compartirTarea(nuevo,id_tarea);
 
+            }
         }
+      
         return RedirectToAction("vistaUsuario", "Home");
     }
     public IActionResult agregarALista(Tarea tarea, Lista lista)
