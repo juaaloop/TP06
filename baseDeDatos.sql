@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [TP06]    Script Date: 11/8/2025 08:57:13 ******/
+/****** Object:  Database [TP06]    Script Date: 18/8/2025 08:58:06 ******/
 CREATE DATABASE [TP06]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -79,10 +79,10 @@ ALTER DATABASE [TP06] SET QUERY_STORE = OFF
 GO
 USE [TP06]
 GO
-/****** Object:  User [alumno]    Script Date: 11/8/2025 08:57:13 ******/
+/****** Object:  User [alumno]    Script Date: 18/8/2025 08:58:06 ******/
 CREATE USER [alumno] FOR LOGIN [alumno] WITH DEFAULT_SCHEMA=[dbo]
 GO
-/****** Object:  Table [dbo].[Lista]    Script Date: 11/8/2025 08:57:13 ******/
+/****** Object:  Table [dbo].[Lista]    Script Date: 18/8/2025 08:58:06 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -93,7 +93,7 @@ CREATE TABLE [dbo].[Lista](
 	[id_usuarioOg] [int] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Tarea]    Script Date: 11/8/2025 08:57:13 ******/
+/****** Object:  Table [dbo].[Tarea]    Script Date: 18/8/2025 08:58:06 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -113,7 +113,7 @@ CREATE TABLE [dbo].[Tarea](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tareaxUsuario]    Script Date: 11/8/2025 08:57:13 ******/
+/****** Object:  Table [dbo].[tareaxUsuario]    Script Date: 18/8/2025 08:58:06 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -123,7 +123,7 @@ CREATE TABLE [dbo].[tareaxUsuario](
 	[id_Usuario] [int] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Usuario]    Script Date: 11/8/2025 08:57:13 ******/
+/****** Object:  Table [dbo].[Usuario]    Script Date: 18/8/2025 08:58:06 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -131,7 +131,7 @@ GO
 CREATE TABLE [dbo].[Usuario](
 	[id_usuario] [int] IDENTITY(1,1) NOT NULL,
 	[username] [varchar](50) NOT NULL,
-	[password] [varchar](50) NOT NULL,
+	[password] [varchar](500) NOT NULL,
  CONSTRAINT [PK_Usuario] PRIMARY KEY CLUSTERED 
 (
 	[id_usuario] ASC
@@ -155,7 +155,7 @@ ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[tareaxUsuario] CHECK CONSTRAINT [FK_tareaxUsuario_Usuario]
 GO
-/****** Object:  StoredProcedure [dbo].[agregarTarea]    Script Date: 11/8/2025 08:57:13 ******/
+/****** Object:  StoredProcedure [dbo].[agregarTarea]    Script Date: 18/8/2025 08:58:06 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -171,7 +171,7 @@ BEGIN
 		RETURN @@IDENTITY
 END
 GO
-/****** Object:  StoredProcedure [dbo].[agregarTareayUser]    Script Date: 11/8/2025 08:57:13 ******/
+/****** Object:  StoredProcedure [dbo].[agregarTareayUser]    Script Date: 18/8/2025 08:58:06 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -184,7 +184,7 @@ BEGIN
 		INSERT INTO tareaxUsuario(id_tarea,id_Usuario) VALUES (@pidTarea,@pid_usuario)
 END
 GO
-/****** Object:  StoredProcedure [dbo].[agregarUsuario]    Script Date: 11/8/2025 08:57:13 ******/
+/****** Object:  StoredProcedure [dbo].[agregarUsuario]    Script Date: 18/8/2025 08:58:06 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -196,8 +196,14 @@ AS
 BEGIN 
 	IF NOT EXISTS(SELECT 1 FROM Usuario WHERE username=@pnombreUsuario)
 	BEGIN 
-		INSERT INTO Usuario(username,password)VALUES(@pnombreUsuario,@ppassword)
+	INSERT INTO Usuario(username,password)VALUES(@pnombreUsuario,@ppassword)
+	SELECT 1
 	END
+	ELSE
+	BEGIN
+		SELECT -1
+	END
+	
 END
 GO
 USE [master]

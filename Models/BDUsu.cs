@@ -11,25 +11,18 @@ public static class BDUsu
         string query = "EXEC agregarUsuario @pnombreUsuario,@ppassword";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            id = connection.QueryFirstOrDefault<int>(query, new { pnombreUsuario = user.username, ppassword = user.password });
+             id = connection.QueryFirstOrDefault<int>(query, new { pnombreUsuario = user.username, ppassword = user.password });  
+             return id==1;
+        }
+      
 
-        }
-        if (id > 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-        //REVISAR QUE DEVUELVE
     }
     public static Usuario obtenerUsuario(string nombreUsuario, string password)
     {
         Usuario usuario = null;
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            string query = "SELECT * FROM Usuario WHERE nombreUsuario=@pnombreUsuario AND password=@ppassword";
+            string query = "SELECT * FROM Usuario WHERE username=@pnombreUsuario AND password=@ppassword";
             usuario = connection.QueryFirstOrDefault<Usuario>(query, new { pnombreUsuario = nombreUsuario, ppassword = password });
         }
         return usuario;
@@ -39,8 +32,8 @@ public static class BDUsu
         int id;
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            string query = "SELECT id_usuario FROM Usuario WHERE nombreUsuario=@pnombreUsuario";
-            id = connection.QueryFirstOrDefault<int>(query, new { pnombreUsuario = nombreUsuario });
+            string query = "SELECT id_usuario FROM Usuario WHERE username=@pnombreUsuario";
+            id = connection.QueryFirstOrDefault<int>(query, new { pnombreUsuario = nombreUsuario});
         }
         return id;
     }

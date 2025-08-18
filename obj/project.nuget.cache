@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "bMA/YnKuD5c=",
   "success": true,
   "projectFilePath": "C:\\Users\\iarit\\Downloads\\TP06\\Downloads.csproj",
+=======
+  "dgSpecHash": "Fuj2+mMw2WWXeQzCp4Xt9CeAq5gbS8xkJ9vf2ETgrLDcmf3IWe+QIsuFTHvgY+Zjh0bv22kcLQ2KwEJUtQZaaA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\49193480\\Downloads\\TP06_Lopez_Szwarstein\\Downloads.csproj",
+>>>>>>> 80a1fa6267611b6bece455588379ba46c3c686b5
   "expectedPackageFiles": [
     "C:\\Users\\iarit\\.nuget\\packages\\azure.core\\1.44.1\\azure.core.1.44.1.nupkg.sha512",
     "C:\\Users\\iarit\\.nuget\\packages\\azure.identity\\1.13.2\\azure.identity.1.13.2.nupkg.sha512",
