@@ -1,0 +1,25 @@
+@{
+    ViewData["Title"] = "Home";
+}
+<link rel="stylesheet" href="style.css">
+
+@{foreach(Lista lista in ViewBag.listas){
+    <div>
+        <h1>@lista.nombre</h1>
+        <form action='@Url.Action("eliminarLista","Tareas")' method="post">
+            <input type="hidden" name="id_lista" value="@lista.id_lista">
+            <input type="submit" value="Eliminar Lista">
+            </form>
+        </div>
+        }
+
+}
+<form action='@Url.Action("crearLista","Tareas")' method="post">
+            <input type="text" name="nombre" required>
+            <input type="submit" value="Crear Lista">
+            </form>
+
+        <form action='@Url.Action("vistaUsuario")' method="post">
+            <input type="submit" value="Volver">
+            </form>
+        

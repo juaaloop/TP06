@@ -12,7 +12,7 @@ public class TareasController : Controller
     {
         _logger = logger;
     }
-    
+
     [HttpPost]
     public IActionResult agregarTarea(string nombre, string contenido)
     {
@@ -21,12 +21,12 @@ public class TareasController : Controller
         //Form arriba del resto de las cosas 
         return RedirectToAction("vistaUsuario", "Home");
     }
-   [HttpPost]
-    public IActionResult modificarTarea(int idtarea,string contenido)
+    [HttpPost]
+    public IActionResult modificarTarea(int idtarea, string contenido)
     {
-        Usuario usu=Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
+        Usuario usu = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
         BD.modificarTarea(idtarea, contenido, usu.id_Usuario);
-        return RedirectToAction("vistaUsuario","Home");
+        return RedirectToAction("vistaUsuario", "Home");
     }
 
     [HttpPost]
@@ -36,14 +36,14 @@ public class TareasController : Controller
         BD.eliminarTarea(id_tarea, usu.id_Usuario);
         return RedirectToAction("vistaUsuario", "Home");
     }
-       [HttpPost]
+    [HttpPost]
     public IActionResult terminarTarea(int id_tarea)
     {
         BD.terminarTarea(id_tarea);
         return RedirectToAction("vistaUsuario", "Home");
     }
-       [HttpPost]
-    public IActionResult compartirTarea(List<int> nuevos, int id_tarea,int id_usuarioog)
+    [HttpPost]
+    public IActionResult compartirTarea(List<int> nuevos, int id_tarea, int id_usuarioog)
     {
         Usuario usu = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
         Console.WriteLine(id_usuarioog);
@@ -52,17 +52,34 @@ public class TareasController : Controller
             foreach (int nuevo in nuevos)
             {
                 Console.WriteLine(nuevo);
-                BD.compartirTarea(nuevo,id_tarea);
+                BD.compartirTarea(nuevo, id_tarea);
 
             }
         }
-      
+
         return RedirectToAction("vistaUsuario", "Home");
     }
-    public IActionResult agregarALista(Tarea tarea, Lista lista)
+    public IActionResult agregarALista(int id_tarea, int id_lista)
     {
-        BD.agregarALista(tarea.id_tarea,lista.idLista);
-       return RedirectToAction("vistaUsuario","home");
+        BDLista.agregarALista(id_tarea, id_lista);
+        return RedirectToAction("vistaUsuario", "home");
+
+    }
+    public IActionResult crearLista(string nombre)
+    {
+        BDLista.agregarLista(nombre);
+        return RedirectToAction("vistaUsuario", "home");
+    }
+    public IActionResult sacarLista(int id_tarea, int id_lista)
+    {
+        BDLista.sacarDeLista(id_tarea, id_lista);
+        return RedirectToAction("vistaUsuario", "home");
+
+    }
+     public IActionResult eliminarLista(int id_lista)
+    {
+        BDLista.eliminarLista( id_lista);
+        return RedirectToAction("vistaUsuario", "home");
 
     }
 }

@@ -45,9 +45,6 @@ public static class BD
     }
     public static void eliminarTarea(int id_Tarea,int id_Usuario){
         string query="UPDATE Tarea SET estaBorrada=1 WHERE id_tarea=@ptareaID AND @pidUsuario=id_usuarioog";
-        Console.WriteLine(id_Tarea);
-                Console.WriteLine(id_Usuario);
-
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             connection.Execute(query, new { ptareaID = id_Tarea, pidUsuario = id_Usuario });
@@ -71,11 +68,4 @@ public static class BD
         }
     }
 
-    public static void agregarALista(int id_Tarea,int lista){
-        string query="UPDATE Tarea SET id_lista=@pidLista WHERE id_tarea=@ptareaID";
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Execute(query, new {ptareaID=id_Tarea,pidLista=lista});
-        }
-    }
 }

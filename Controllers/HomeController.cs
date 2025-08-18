@@ -18,25 +18,48 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult iniciarSesion(){
-        Usuario usu=Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
-        if (usu != null) {
+    public IActionResult iniciarSesion()
+    {
+        Usuario usu = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
+        if (usu != null)
+        {
             return RedirectToAction("vistaUsuario");
         }
         return View();
     }
 
-    public IActionResult registrarse(){
+    public IActionResult registrarse()
+    {
 
         return View();
     }
-    public IActionResult vistaUsuario(){
+    public IActionResult vistaUsuario()
+    {
+        Usuario usu = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
+        if (usu == null)
+        {
+            return RedirectToAction("iniciarSesion");
+        }
+        else
+        {
 
-        Usuario usu=Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
-        ViewBag.nombre=usu.username;
-        ViewBag.otrosUsuarios = BDUsu.levantarUsuarios(usu);
-        ViewBag.tareas=BD.levantarTarea(usu.id_Usuario);
 
-        return View();
+            ViewBag.nombre = usu.username;
+            ViewBag.otrosUsuarios = BDUsu.levantarUsuarios(usu);
+            ViewBag.tareas = BD.levantarTarea(usu.id_Usuario);
+
+
+            return View();
+           }
+    }
+     public IActionResult listas(){
+        Usuario usu = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
+        if (usu == null)
+        {
+            return RedirectToAction("iniciarSesion");
+        }
+        else
+            ViewBag.listas = BDLista.obtenerListas();
+            return View();
     }
 }
