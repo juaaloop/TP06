@@ -19,6 +19,10 @@ public class HomeController : Controller
     }
 
     public IActionResult iniciarSesion(){
+        Usuario usu=Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
+        if (usu != null) {
+            return RedirectToAction("vistaUsuario");
+        }
         return View();
     }
 
@@ -31,7 +35,7 @@ public class HomeController : Controller
         Usuario usu=Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
         ViewBag.nombre=usu.username;
         ViewBag.otrosUsuarios = BDUsu.levantarUsuarios(usu);
-        ViewBag.tareas=BD.levantarTarea(usu);
+        ViewBag.tareas=BD.levantarTarea(usu.id_Usuario);
 
         return View();
     }

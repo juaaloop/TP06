@@ -3,7 +3,7 @@ using Dapper;
 public static class BDUsu
 {
 
-    public static string connectionString = @"Server=localhost;
+    public static string connectionString = @"Server=localhost\SQLEXPRESS01;
     DataBase=TP06; Integrated Security=True; TrustServerCertificate=True;";
     public static bool agregarUsuario(Usuario user)
     {
@@ -43,7 +43,7 @@ public static class BDUsu
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             string query="SELECT * FROM Usuario WHERE id_usuario IN (SELECT id_usuario FROM Usuario WHERE id_usuario!=@pidUsuario)";
-            usu=connection.Query<Usuario>(query, new{pidUsuario=usuario.idUsuario}).ToList();
+            usu=connection.Query<Usuario>(query, new{pidUsuario=usuario.id_Usuario}).ToList();
         }
         return usu;
     }

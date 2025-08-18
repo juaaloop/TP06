@@ -1,14 +1,8 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "bMA/YnKuD5c=",
   "success": true,
   "projectFilePath": "C:\\Users\\iarit\\Downloads\\TP06\\Downloads.csproj",
-=======
-  "dgSpecHash": "Fuj2+mMw2WWXeQzCp4Xt9CeAq5gbS8xkJ9vf2ETgrLDcmf3IWe+QIsuFTHvgY+Zjh0bv22kcLQ2KwEJUtQZaaA==",
-  "success": true,
-  "projectFilePath": "C:\\Users\\49193480\\Downloads\\TP06_Lopez_Szwarstein\\Downloads.csproj",
->>>>>>> 80a1fa6267611b6bece455588379ba46c3c686b5
   "expectedPackageFiles": [
     "C:\\Users\\iarit\\.nuget\\packages\\azure.core\\1.44.1\\azure.core.1.44.1.nupkg.sha512",
     "C:\\Users\\iarit\\.nuget\\packages\\azure.identity\\1.13.2\\azure.identity.1.13.2.nupkg.sha512",
@@ -65,5 +59,12 @@
     "C:\\Users\\iarit\\.nuget\\packages\\system.text.json\\8.0.5\\system.text.json.8.0.5.nupkg.sha512",
     "C:\\Users\\iarit\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\iarit\\Downloads\\TP06\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

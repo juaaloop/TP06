@@ -1,7 +1,7 @@
 @{
     ViewData["Title"] = "Home";
 }
-
+<link rel="stylesheet" href="style.css">
 @ViewBag.nombre
 
 @{foreach(Tarea tarea in ViewBag.tareas){
@@ -9,22 +9,22 @@
         <h1>@tarea.nombre</h1>
         <h3>@tarea.contenido</h3>
         <p>@tarea.fechaCreacion</p>
+        <p>@tarea.estaFinalizada</p>
         <div class="opciones">
             <form action='@Url.Action("eliminarTarea","Tareas")' method="post">
-                <input type="hidden" name="id" value="@tarea.idTarea">
+                <input type="hidden" name="id_tarea" value=@tarea.id_tarea>
                 <input type="submit" value="Eliminar">
             </form>
              <form action='@Url.Action("terminarTarea","Tareas")' method="post">
-                <input type="hidden" name="id" value="@tarea.idTarea">
+                <input type="hidden" name="id_tarea" value=@tarea.id_tarea>
                 <input type="submit" value="Terminar">
             </form>
-            <form action='@Url.Action("terminarTarea","Tareas")' method="post">
+            <form action='@Url.Action("compartirTarea","Tareas")' method="post">
                 @foreach(Usuario usuario in ViewBag.otrosUsuarios){
-                    <input type="checkbox" name=@usuario.username value="@usuario.idUsuario">
+                    <input type="checkbox" name=@usuario.username value="@usuario.id_Usuario">
                 } 
                 <input type="submit" value="Terminar">
             </form>
-        </div>
         </div>
         </div>
     }
@@ -33,5 +33,5 @@
 <form action='@Url.Action("agregarTarea","Tareas")' method="post">
 <p>Nombre:</p><input type="text" name="nombre" required>
 <p>Contenido:</p><input type="text" name="contenido" required>
-<input type="submit" value="Registrarse">
+<input type="submit" value="Agregar">
 </form>
