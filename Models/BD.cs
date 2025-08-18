@@ -45,13 +45,6 @@ public static class BD
             connection.Execute(query, new {ptareaID=id_Tarea, pidUsuario=id_usuario});
         }
     }
-    public static void recuperarTarea(int id_Tarea,int id_usuario){
-        string query="UPDATE Tarea (estaBorrada) VALUES (0) WHERE id_tarea=@ptareaID AND @pidUsuario IN (SELECT id_usuario FROM Tarea WHERE id_tarea=@ptareaID)";
-        using (SqlConnection connection = new SqlConnection(connectionString))
-        {
-            connection.Execute(query, new {ptareaID=id_Tarea, pidUsuario=id_usuario});
-        }
-    }
       public static void terminarTarea(int id_Tarea){
         string query="UPDATE Tarea (estaFinalizada) VALUES (1) WHERE id_tarea=@ptareaID";
         using (SqlConnection connection = new SqlConnection(connectionString))
