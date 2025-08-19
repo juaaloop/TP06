@@ -1,97 +1,94 @@
-@{
     ViewData["Title"] = "Home";
 }
-<link rel="stylesheet" href="/css/style.css">
-@ViewBag.nombre
+<link rel="stylesheet" href="style.css">
 
-<section class="tareas">
-@{foreach(Tarea tarea in ViewBag.tareas){
-        <div class="tarea">
-        <h1>@tarea.nombre</h1>
-        <p>@tarea.fechaCreacion.ToShortDateString()</p>
-          @{if (@tarea.estaFinalizada){
-        
-            <p>Esta tarea ya ha sido finalizada</p>
-            }
-        }
-        <h4>@tarea.contenido</h4>      
-        <div class="opciones">
-            <div class="borrar">
-            <form action='@Url.Action("eliminarTarea","Tareas")' method="post">
-                <input type="hidden" name="id_tarea" value=@tarea.id_tarea>
-                <input type="submit" value="Eliminar">
-            </form>
-             <form action='@Url.Action("terminarTarea","Tareas")' method="post">
-                <input type="hidden" name="id_tarea" value=@tarea.id_tarea>
-                <input type="submit" value="Terminar">
-            </form>
-            </div>
-            <div class="modificar">
-             <form action='@Url.Action("modificarTarea","Tareas")' method="post">
-                <input type="hidden" name="idtarea" value=@tarea.id_tarea>
-                <p>Editar Contenido:</p><input type="text" name="contenido">
-                <input type="submit" value="Terminar">
-                
-            </form>
-            </div>
-            <form action='@Url.Action("compartirTarea","Tareas")' method="post">
-                <p>Compartir con:</p>
-                @foreach(Usuario usuario in ViewBag.otrosUsuarios){
-                    <label>
-                        @usuario.username<input type="checkbox" name="nuevos" value="@usuario.id_Usuario">
-                    </label><br>
-                }
-                <input type="hidden" name="id_tarea" value="@tarea.id_tarea">
-                <input type="hidden" name="id_usuarioog" value="@tarea.id_usuarioog">
-                <input type="submit" value="Compartir"/>
-            </form>
-        </div>
-        @{if (tarea.id_lista != 0){
-            <p>Lista: @BDLista.obtenerNombre(@tarea.id_lista)</p>
-            <form action='@Url.Action("sacarLista","Tareas")' method="post">
-                <input type="hidden" name="id_tarea" value="@tarea.id_tarea">
-                <input type="hidden" name="id_lista" value="@tarea.id_lista">
-                <input type="submit" value="Eliminar de lista">
-            </form>
-        }
-        else {
-            <form action='@Url.Action("agregarALista","Tareas")' method="post">
-                <p>Agregar a lista:</p>
-                <select name="id_lista" required>
-                    <option value="" disabled selected>Selecciona una lista</option>
-                    @foreach(Lista lista in ViewBag.listas){
-                        <option value="@lista.id_lista">@lista.nombre</option>
+<main class="vista">
+    <h2>¡Hola, @ViewBag.nombre!</h2>
+    <section class="tareas">
+        @{
+            foreach (Tarea tarea in ViewBag.tareas)
+            {
+                <div>
+                    <h3>@tarea.nombre</h3>
+                    <p>@tarea.contenido</p>
+                    <p>@tarea.fechaCreacion</p>
+                    @{
+                        if (@tarea.estaFinalizada)
+                        {
+
+                            <p>Esta tarea ya ha sido finalizada</p>
+                        }
                     }
-                </select>
-                <input type="hidden" name="id_tarea" value="@tarea.id_tarea">
-                <input type="submit" value="Agregar" class="boton">
+                    <div>
+                        <form action='@Url.Action("eliminarTarea","Tareas")' method="post">
+                            <input type="hidden" name="id_tarea" value=@tarea.id_tarea>
+                            <input type="submit" value="Eliminar">
+                        </form>
+                        <form action='@Url.Action("terminarTarea","Tareas")' method="post">
+                            <input type="hidden" name="id_tarea" value=@tarea.id_tarea>
+                            <input type="submit" value="Terminar">
+                        </form>
+                        <form action='@Url.Action("compartirTarea","Tareas")' method="post">
+                            <p>Compartir con:</p>
+                            @foreach (Usuario usuario in ViewBag.otrosUsuarios)
+                            {
+                                @usuario.username
+
+                                <input type="checkbox" name="nuevos" value="@usuario.id_Usuario">
+                            }
+
+                            <input type="hidden" name="id_tarea" value="@tarea.id_tarea">
+                            <input type="hidden" name="id_usuarioog" value="@tarea.id_usuarioog">
+
+                            <input type="submit" value="Terminar" />
+                        </form>
+                    </div>
+                    @{
+                        if (tarea.id_lista != 0)
+                        {
+                            <p>Lista: @BDLista.obtenerNombre(@tarea.id_lista)</p>
+                            <form action='@Url.Action("sacarLista","Tareas")' method="post">
+                                <input type="hidden" name="id_tarea" value="@tarea.id_tarea">
+                                <input type="hidden" name="id_lista" value="@tarea.id_lista">
+                                <input type="submit" value="Eliminar de lista">
+                            </form>
+                        }
+                        else
+                        {
+                            <form action='@Url.Action("agregarALista","Tareas")' method="post">
+                                <p>Agregar a lista:</p>
+                                @foreach (Lista lista in ViewBag.listas)
+                                {
+                                    <input type="radio" name="id_lista" value="@lista.id_lista">
+                                    @lista.nombre
+                                }
+                                <input type="hidden" name="id_tarea" value="@tarea.id_tarea">
+                                <input type="submit" value="Agregar">
+                            </form>
+                        }
+                    }
+
+                </div>
+            }
+
+        }
+    </section>
+    <section class="agregar">
+        <div>
+            <form action='@Url.Action("agregarTarea", "Tareas")' method="post">
+                <p>Nombre:<input type="text" name="nombre" required></p>
+                <p>Contenido:<input type="text" name="contenido" required></p>
+                <input type="submit" value="Agregar">
             </form>
-        }
-        }
-        
+            <form action='@Url.Action("cerrarSesion", "Usuario")'>
+                <input type="submit" value="Cerrar Sesión">
+            </form>
+            <form action='@Url.Action("listas", "Home")'>
+                <input type="submit" value="Ir a administrador de listas">
+            </form>
+            <form action='@Url.Action("Reciclaje", "Home")'>
+                <input type="submit" value="Cerrar Sesión">
+            </form>
         </div>
-    }
-
-}
-</section>
-<section class="extras">
-    <div class="agregar">
-<h2>Agregar Tarea</h2>
-<form action='@Url.Action("agregarTarea","Tareas")' method="post">
-<p>Nombre:</p><input type="text" name="nombre" required>
-<p>Contenido:</p><input type="text" name="contenido" required>
-<input type="submit" value="Agregar">
-</form>
-</div>
-
-  <form action='@Url.Action("cerrarSesion","Usuario")'>
-        <input type="submit" value="Cerrar Sesión">
-    </form>
-      <form action='@Url.Action("listas","Home")'>
-        <input type="submit" value="Ir a administrador de listas">
-    </form>
-<form action='@Url.Action("Reciclaje","Home")'>
-        <input type="submit" value="Ir a papelera de reciclaje">
-    </form>
-
-</section>
+    </section>
+</main>

@@ -3,23 +3,23 @@
 }
 <link rel="stylesheet" href="/css/style.css">
 
-<body>
+<main class="registrarse">
     <section>
-@if(ViewBag.estado=="errorUsuario"){
-    <h2 class="error">el nombre de usuario ya esta siendo usado. Intente con otro nombre.</h2>
-}
-<form action='@Url.Action("registrarNuevo","Usuario")' method="post">
-<p>Nombre de usuario:</p><input type="text" name="nombreUsuarioNuevo" required>
-<p>Contraseña:</p><input type="text" name="password" required>
-<input type="submit" value="Registrarse">
-</form>
-</section>
-<div>
-<a href='@Url.Action("iniciarSesion")' method="post" class="iniciarSesion">Iniciar Sesión</a>
-</div>
 
-
-
-
-</body>
-<footer></footer>
+        @if (ViewBag.estado == "errorUsuario")
+        {
+            <p class="error">Error: El nombre de usuario ya esta siendo usado. Intente con otro nombre.</p>
+        }
+        <div>
+            <h2>Resgistrarse</h2>
+            <form action='@Url.Action("registrarNuevo", "Usuario")' method="post">
+                <input type="text" name="nombreUsuarioNuevo" placeholder="Nombre de usuario" required>
+                <input type="password" name="password" placeholder="Contraseña" required>
+                <input type="submit" value="Registrarse">
+            </form>
+            <p>¿Ya tenés una cuenta?
+                <a href='@Url.Action("iniciarSesion")' method="post" class="iniciarSesion">Iniciar Sesión</a>
+            </p>
+        </div>
+    </section>
+</main>
