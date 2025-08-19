@@ -34,7 +34,6 @@ public static class BD
         }
     }
     public static List<Tarea> levantarTarea(int idUsuario){
-        
         List<Tarea> tarea=new List<Tarea>(); 
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
@@ -43,6 +42,16 @@ public static class BD
         }
         return tarea;
     }
+
+    public static List<Tarea> levantarTareasBorradas(int idUsuario){
+        List<Tarea> tareasBorradas = new List<Tarea>();
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            string query = "SELECT * FROM tarea WHERE id_tarea IN (SELECT id_Tarea FROM tareaxUsuario WHERE id_usuario=@pidUsuario) AND estaborrada=1 AND @pidUsuario=id_usuarioog";
+            tareasBorradas = connection.Query<Tarea>(query, new { pidUsuario = idUsuario }).ToList();
+        }
+        return tareasBorradas;
+    }
     public static void eliminarTarea(int id_Tarea,int id_Usuario){
         string query="UPDATE Tarea SET estaBorrada=1 WHERE id_tarea=@ptareaID AND @pidUsuario=id_usuarioog";
         using (SqlConnection connection = new SqlConnection(connectionString))
@@ -50,11 +59,19 @@ public static class BD
             connection.Execute(query, new { ptareaID = id_Tarea, pidUsuario = id_Usuario });
         }
     }
-      public static void terminarTarea(int id_Tarea){
-        string query="UPDATE Tarea SET estaFinalizada=1 WHERE id_tarea=@ptareaID";
+     public static void recuperarTarea(int id_Tarea){
+        string query="UPDATE Tarea SET estaBorrada=0 WHERE id_tarea=@ptareaID";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            connection.Execute(query, new {ptareaID=id_Tarea});
+            connection.Execute(query, new { ptareaID = id_Tarea });
+        }
+    }
+      public static void terminarTarea(int id_Tarea)
+    {
+        string query = "UPDATE Tarea SET estaFinalizada=1 WHERE id_tarea=@ptareaID";
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Execute(query, new { ptareaID = id_Tarea });
         }
     }
 

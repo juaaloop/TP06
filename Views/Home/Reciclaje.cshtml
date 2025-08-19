@@ -1,0 +1,25 @@
+@{
+	ViewData["Title"] = "Reciclaje";
+}
+<link rel="stylesheet" href="~/css/style.css">
+<h1>Papelera de reciclaje</h1>
+
+@if (ViewBag.tareasBorradas != null)
+{
+	foreach (Tarea tarea in ViewBag.tareasBorradas)
+	{
+		<div class="tareaBorrada">
+			<h2>@tarea.nombre</h2>
+			<p>@tarea.contenido</p>
+			<p>Fecha: @tarea.fechaCreacion</p>
+			<form action='@Url.Action("recuperarTarea", "Tareas")' method="post">
+				<input type="hidden" name="id_tarea" value="@tarea.id_tarea" />
+				<input type="submit" value="Recuperar" />
+			</form>
+		</div>
+	}
+}
+else
+{
+	<p>No hay tareas borradas.</p>
+}

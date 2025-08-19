@@ -35,23 +35,23 @@
                 <input type="submit" value="Terminar"/>
             </form>
         </div>
-        @{if (tarea.id_lista != null){
-            <p> @BDLista.obtenerNombre(@tarea.id_lista);</p>
-            <form action='@Url.Action("sacarLista","Tarea")' method="post">
+        @{if (tarea.id_lista != 0){
+            <p>Lista: @BDLista.obtenerNombre(@tarea.id_lista)</p>
+            <form action='@Url.Action("sacarLista","Tareas")' method="post">
                 <input type="hidden" name="id_tarea" value="@tarea.id_tarea">
                 <input type="hidden" name="id_lista" value="@tarea.id_lista">
                 <input type="submit" value="Eliminar de lista">
-                 </form>
+            </form>
         }
-        else{
-            <form action='@Url.Action("agregarALista","Tarea")' method="post">
+        else {
+            <form action='@Url.Action("agregarALista","Tareas")' method="post">
                 <p>Agregar a lista:</p>
                 @foreach(Lista lista in ViewBag.listas){
                     <input type="radio" name="id_lista" value="@lista.id_lista">@lista.nombre
                 }
                 <input type="hidden" name="id_tarea" value="@tarea.id_tarea">
                 <input type="submit" value="Agregar">
-                </form>
+            </form>
         }
         }
         
@@ -70,4 +70,6 @@
       <form action='@Url.Action("listas","Home")'>
         <input type="submit" value="Ir a administrador de listas">
     </form>
-
+<form action='@Url.Action("Reciclaje","Home")'>
+        <input type="submit" value="Cerrar Sesión">
+    </form>

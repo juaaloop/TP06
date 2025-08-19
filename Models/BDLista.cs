@@ -53,7 +53,7 @@ public static class BDLista
           List<Lista> listas=new List<Lista>(); 
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
-            string query="SELECT * FROM Lista";
+            string query="SELECT * FROM Lista ";
             listas=connection.Query<Lista>(query).ToList();
         }
         return listas;

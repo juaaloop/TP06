@@ -36,6 +36,12 @@ public class TareasController : Controller
         BD.eliminarTarea(id_tarea, usu.id_Usuario);
         return RedirectToAction("vistaUsuario", "Home");
     }
+     public IActionResult recuperarTarea(int id_tarea)
+    {
+        Usuario usu = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
+        BD.recuperarTarea(id_tarea);
+        return RedirectToAction("vistaUsuario", "Home");
+    }
     [HttpPost]
     public IActionResult terminarTarea(int id_tarea)
     {

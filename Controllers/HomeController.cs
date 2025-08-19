@@ -36,30 +36,26 @@ public class HomeController : Controller
     public IActionResult vistaUsuario()
     {
         Usuario usu = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
-        if (usu == null)
-        {
-            return RedirectToAction("iniciarSesion");
-        }
-        else
-        {
-
 
             ViewBag.nombre = usu.username;
             ViewBag.otrosUsuarios = BDUsu.levantarUsuarios(usu);
             ViewBag.tareas = BD.levantarTarea(usu.id_Usuario);
-
+        ViewBag.listas = BDLista.obtenerListas();
 
             return View();
-           }
+
     }
-     public IActionResult listas(){
-        Usuario usu = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
-        if (usu == null)
-        {
-            return RedirectToAction("iniciarSesion");
-        }
-        else
+    public IActionResult listas()
+    {
             ViewBag.listas = BDLista.obtenerListas();
-            return View();
+        return View();
+    }
+    public IActionResult reciclaje(){
+        Usuario usu = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
+        if (usu != null)
+        {
+            ViewBag.tareasBorradas = BD.levantarTareasBorradas(usu.id_Usuario);
+        }
+        return View();
     }
 }
