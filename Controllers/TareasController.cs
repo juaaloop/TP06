@@ -52,12 +52,10 @@ public class TareasController : Controller
     public IActionResult compartirTarea(List<int> nuevos, int id_tarea, int id_usuarioog)
     {
         Usuario usu = Objeto.StringToObject<Usuario>(HttpContext.Session.GetString("usuario"));
-        Console.WriteLine(id_usuarioog);
         if (usu.id_Usuario == id_usuarioog)
         {
             foreach (int nuevo in nuevos)
             {
-                Console.WriteLine(nuevo);
                 BD.compartirTarea(nuevo, id_tarea);
 
             }

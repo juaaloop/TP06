@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\iarit\\Downloads\\TP06\\Downloads.csproj": {}
+    "C:\\Users\\iarit\\TP06_Lopez_Szwarstein-1\\Downloads.csproj": {}
   },
   "projects": {
-    "C:\\Users\\iarit\\Downloads\\TP06\\Downloads.csproj": {
+    "C:\\Users\\iarit\\TP06_Lopez_Szwarstein-1\\Downloads.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\iarit\\Downloads\\TP06\\Downloads.csproj",
+        "projectUniqueName": "C:\\Users\\iarit\\TP06_Lopez_Szwarstein-1\\Downloads.csproj",
         "projectName": "Downloads",
-        "projectPath": "C:\\Users\\iarit\\Downloads\\TP06\\Downloads.csproj",
+        "projectPath": "C:\\Users\\iarit\\TP06_Lopez_Szwarstein-1\\Downloads.csproj",
         "packagesPath": "C:\\Users\\iarit\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\iarit\\Downloads\\TP06\\obj\\",
+        "outputPath": "C:\\Users\\iarit\\TP06_Lopez_Szwarstein-1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\iarit\\AppData\\Roaming\\NuGet\\NuGet.Config",

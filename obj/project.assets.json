@@ -2559,11 +2559,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\iarit\\Downloads\\TP06\\Downloads.csproj",
+      "projectUniqueName": "C:\\Users\\iarit\\TP06_Lopez_Szwarstein-1\\Downloads.csproj",
       "projectName": "Downloads",
-      "projectPath": "C:\\Users\\iarit\\Downloads\\TP06\\Downloads.csproj",
+      "projectPath": "C:\\Users\\iarit\\TP06_Lopez_Szwarstein-1\\Downloads.csproj",
       "packagesPath": "C:\\Users\\iarit\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\iarit\\Downloads\\TP06\\obj\\",
+      "outputPath": "C:\\Users\\iarit\\TP06_Lopez_Szwarstein-1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\iarit\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2636,13 +2636,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.407/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\iarit\\Downloads\\TP06\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }
