@@ -73,16 +73,11 @@ ALTER DATABASE [TP06] SET TARGET_RECOVERY_TIME = 60 SECONDS
 GO
 ALTER DATABASE [TP06] SET DELAYED_DURABILITY = DISABLED 
 GO
-EXEC sys.sp_db_vardecimal_storage_format N'TP06', N'ON'
-GO
 ALTER DATABASE [TP06] SET QUERY_STORE = OFF
 GO
 USE [TP06]
 GO
-/****** Object:  User [alumno]    Script Date: 18/8/2025 08:58:06 ******/
-CREATE USER [alumno] FOR LOGIN [alumno] WITH DEFAULT_SCHEMA=[dbo]
-GO
-/****** Object:  Table [dbo].[Lista]    Script Date: 18/8/2025 08:58:06 ******/
+/****** Object:  Table [dbo].[Lista]    Script Date: 18/8/2025 21:46:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -90,10 +85,13 @@ GO
 CREATE TABLE [dbo].[Lista](
 	[id_lista] [int] IDENTITY(1,1) NOT NULL,
 	[nombre] [varchar](50) NOT NULL,
-	[id_usuarioOg] [int] NOT NULL
+ CONSTRAINT [PK_Lista] PRIMARY KEY CLUSTERED 
+(
+	[id_lista] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Tarea]    Script Date: 18/8/2025 08:58:06 ******/
+/****** Object:  Table [dbo].[Tarea]    Script Date: 18/8/2025 21:46:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -113,7 +111,7 @@ CREATE TABLE [dbo].[Tarea](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[tareaxUsuario]    Script Date: 18/8/2025 08:58:06 ******/
+/****** Object:  Table [dbo].[tareaxUsuario]    Script Date: 18/8/2025 21:46:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -123,7 +121,7 @@ CREATE TABLE [dbo].[tareaxUsuario](
 	[id_Usuario] [int] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Usuario]    Script Date: 18/8/2025 08:58:06 ******/
+/****** Object:  Table [dbo].[Usuario]    Script Date: 18/8/2025 21:46:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -138,24 +136,7 @@ CREATE TABLE [dbo].[Usuario](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[Lista]  WITH CHECK ADD  CONSTRAINT [FK_Lista_Tarea] FOREIGN KEY([id_lista])
-REFERENCES [dbo].[Tarea] ([id_tarea])
-GO
-ALTER TABLE [dbo].[Lista] CHECK CONSTRAINT [FK_Lista_Tarea]
-GO
-ALTER TABLE [dbo].[tareaxUsuario]  WITH CHECK ADD  CONSTRAINT [FK_tareaxUsuario_Tarea] FOREIGN KEY([id_Tarea])
-REFERENCES [dbo].[Tarea] ([id_tarea])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[tareaxUsuario] CHECK CONSTRAINT [FK_tareaxUsuario_Tarea]
-GO
-ALTER TABLE [dbo].[tareaxUsuario]  WITH CHECK ADD  CONSTRAINT [FK_tareaxUsuario_Usuario] FOREIGN KEY([id_Usuario])
-REFERENCES [dbo].[Usuario] ([id_usuario])
-ON DELETE CASCADE
-GO
-ALTER TABLE [dbo].[tareaxUsuario] CHECK CONSTRAINT [FK_tareaxUsuario_Usuario]
-GO
-/****** Object:  StoredProcedure [dbo].[agregarTarea]    Script Date: 18/8/2025 08:58:06 ******/
+/****** Object:  StoredProcedure [dbo].[agregarTarea]    Script Date: 18/8/2025 21:46:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -168,10 +149,10 @@ AS
 BEGIN 
 		INSERT INTO Tarea (nombre, id_usuarioog, fechaCreacion, estaFinalizada, estaBorrada, contenido) VALUES (@pnombre,@pid_usuario, GETDATE(), 0, 0, @pcontenido)
 		
-		RETURN @@IDENTITY
+		SELECT @@IDENTITY
 END
 GO
-/****** Object:  StoredProcedure [dbo].[agregarTareayUser]    Script Date: 18/8/2025 08:58:06 ******/
+/****** Object:  StoredProcedure [dbo].[agregarTareayUser]    Script Date: 18/8/2025 21:46:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -181,10 +162,14 @@ CREATE PROCEDURE [dbo].[agregarTareayUser]
 @pid_usuario int
 AS
 BEGIN 
+		IF NOT EXISTS (SELECT 1 FROM tareaxUsuario WHERE id_tarea = @pidTarea AND id_usuario = @pid_usuario)
+		BEGIN
 		INSERT INTO tareaxUsuario(id_tarea,id_Usuario) VALUES (@pidTarea,@pid_usuario)
+		END
+
 END
 GO
-/****** Object:  StoredProcedure [dbo].[agregarUsuario]    Script Date: 18/8/2025 08:58:06 ******/
+/****** Object:  StoredProcedure [dbo].[agregarUsuario]    Script Date: 18/8/2025 21:46:48 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
