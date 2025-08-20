@@ -2,21 +2,23 @@
     ViewData["Title"] = "Registrarse";
 }
 <link rel="stylesheet" href="/css/style.css">
+<title>Registrarse</title>
 
 <main class="registrarse">
     <section>
 
-        @if (ViewBag.estado == "errorUsuario")
-        {
-            <p class="error">Error: El nombre de usuario ya esta siendo usado. Intente con otro nombre.</p>
-        }
-        <div>
+               <div>
             <h2>Resgistrarse</h2>
             <form action='@Url.Action("registrarNuevo", "Usuario")' method="post">
                 <input type="text" name="nombreUsuarioNuevo" placeholder="Nombre de usuario" required>
                 <input type="password" name="password" placeholder="Contraseña" required>
                 <input type="submit" value="Registrarse">
             </form>
+             @if (ViewBag.estado == "Nofunciono")
+        {
+            <p>Error: El nombre de usuario ya esta siendo usado. Intente con otro nombre.</p>
+        }
+
             <p>¿Ya tenés una cuenta?
                 <a href='@Url.Action("iniciarSesion")' method="post" class="iniciarSesion">Iniciar Sesión</a>
             </p>

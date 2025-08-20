@@ -1,10 +1,16 @@
 @{
     ViewData["Title"] = "Home";
 }
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/css/style.css">
+<title>Administrador de listas</title>
+@if (ViewBag.id == null || ViewBag.id == 0)
+{
+    <h2>Debes iniciar sesión para ver esta página</h2>
+}else{
+<section class="listasHome">
 
 @{foreach(Lista lista in ViewBag.listas){
-    <div>
+    <div class="lista">
         <h1>@lista.nombre</h1>
         <form action='@Url.Action("eliminarLista","Tareas")' method="post">
             <input type="hidden" name="id_lista" value="@lista.id_lista">
@@ -22,4 +28,4 @@
         <form action='@Url.Action("vistaUsuario")' method="post">
             <input type="submit" value="Volver">
             </form>
-        
+        </section>}

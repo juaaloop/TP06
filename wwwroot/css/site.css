@@ -10,11 +10,12 @@ html {
   }
 }
 
-body {}
+main {MARGIn-top:1%;}
 
 header {
   margin: 1%;
   background-color: #81B29A;
+  margin-bottom:1%;
 }
 header a{
   text-decoration: none;

@@ -72,7 +72,7 @@ public class TareasController : Controller
     public IActionResult crearLista(string nombre)
     {
         BDLista.agregarLista(nombre);
-        return RedirectToAction("vistaUsuario", "home");
+        return RedirectToAction("listas", "home");
     }
     public IActionResult sacarLista(int id_tarea, int id_lista)
     {
@@ -83,7 +83,7 @@ public class TareasController : Controller
      public IActionResult eliminarLista(int id_lista)
     {
         BDLista.eliminarLista( id_lista);
-        return RedirectToAction("vistaUsuario", "home");
+        return RedirectToAction("listas", "home");
 
     }
 }

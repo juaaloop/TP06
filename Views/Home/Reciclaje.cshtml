@@ -2,7 +2,11 @@
 	ViewData["Title"] = "Reciclaje";
 }
 <link rel="stylesheet" href="~/css/style.css">
-
+<title>Papelera de reciclaje</title>
+@if (ViewBag.id == null || ViewBag.id == 0)
+{
+    <h2>Debes iniciar sesión para ver esta página</h2>
+}else{
 <main class="papelera">
 	<section>
 		<h2>Papelera de reciclaje</h2>
@@ -12,7 +16,7 @@
 			
 				foreach (Tarea tarea in ViewBag.tareasBorradas)
 				{
-				<div>
+				<div class="tareaBorrada">
 					<h3>@tarea.nombre</h3>
 					<p>@tarea.contenido</p>
 					<p>Fecha: @tarea.fechaCreacion</p>
@@ -24,11 +28,15 @@
 				}
 			
 		}
-</div>
+
 		else
 		{
 			<p>No hay tareas borradas.</p>
 		}
-
+</div>
 	</section>
+   <form action='@Url.Action("vistaUsuario")' method="post">
+            <input type="submit" value="Volver">
+            </form>
 </main>
+}

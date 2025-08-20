@@ -1,5 +1,4 @@
 * {
-    border: 1px solid black;
     margin: 0%;
     padding: 0%;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -11,6 +10,9 @@ h1 {
 
 h3 {
     font-size: 24px;
+}
+h4{
+    margin-left:2%;
 }
 
 main {
@@ -114,71 +116,157 @@ main {
     justify-content: center;
 }
 
-.vista {
-    width: 100%;
-    display: inline-block
-}
 
-.vista .tareas {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    width: 75%;
-    justify-self: center;
-}
-
-.vista .tareas div {
-    width: 60%;
-    justify-self: center;
-    padding: 4%;
-    background-color: #e9e7da;
-    border-radius: 8px;
-    position: relative;
-}
-
-.vista section div div {
-    display: inline-block;
+.tarea{
     width: 90%;
-    justify-content: center;
+    padding: 1.5%;
+    background-color: #e0f7e0;
+    border: 1px solid #4caf50;
+    border-radius: 10px;
+    margin-bottom: 1%;;
+    padding-right:1.5%;
+}
+.tareas{
+     display: grid; 
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2%;
+    margin-left:2%;
+    width:100%;
+    margin-bottom: 5%;;
 }
 
-.vista section div div input {
-    width: 60%;
+.tarea h2{
+    text-align: center;
+    
+}
+
+.tarea h4{
+    margin-left:3%;
+    margin-right:3%;
+
+     word-break: break-all;
+}
+
+.borrar{
+    display:flex;
+    justify-content: space-evenly;
+    margin-top:1%;
+}
+form input[type="submit"]{
+    width: 30%;
+    border:1px solid #4cab27;
+    background-color: #bbeeb6;
+    border-radius: 5px;
+    margin-top:1%;
+    PADDING: 1%;
+}
+.borrar form input[type="submit"]{
+    width: 117%;
+    padding:10%;
+    border-radius: 5px;
+}
+
+.tarea p{
+    font-size: smaller;
+    text-align:center;
+}
+
+.modificar{
+    display:flex;
+    justify-content: space-evenly;
+    margin-top:1%;
+}
+.modificar input[type="text"]{
+ width:60%;
+}
+select{
+    margin-left:10%;
+}
+
+.agregar{
+    width: 50%;
     padding: 1%;
-    border-radius: 20px;
-    text-decoration: none;
-    background-color: #3D405B;
-    color: #F4F1DE;
+    background-color: #d5fdd8;
+    border:#226408 2px solid;
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 2%;
+    margin-left: -11%;
 }
 
-.vista .agregar p {
-    width: 100%;
-    display: flex;
-    gap: 5%;
-    justify-content: center;
+.extras{
+    margin-left:45%;
 }
-
-.vista .agregar div {
-    width: 60%;
-    display: inline-block;
-    justify-self: center;
+.papelera h2{
+    margin-top:2%;
+    text-align: center;
 }
-
-.vista .agregar form input[type="submit"] {
-    width: 15%;
-    padding: 0.75%;
-    border-radius: 20px;
-    text-decoration: none;
-    background-color: #3D405B;
-    color: #F4F1DE;
+.papelera form{
+    margin-left:40%;
 }
-
-.vista .agregar div {
-    border-radius: 8px;
+.tareaBorrada {
+    width: 30%;
     padding: 1%;
-    margin-left: 16.5%;
-    width: 65%;
-    display: inline-block;
-    justify-self: center;
-    background-color: #e9e7da;
-    margin-top: 2.5%;
+    background-color: #e3ffe0;
+    border: 1px solid #227d1d;
+    border-radius: 10px;
+    margin-top:1%;
+    margin-bottom: 2%;
+    margin-left:35%;
+    box-shadow: #78d14f 0px 0px 10px 2px;
 }
+.tareaBorrada h2 {
+    text-align: left;
+    color: #00a803;
+}
+.tareaBorrada p {
+    width:40%;
+    font-size: smaller;
+    text-align: left;
+    color: #006d21;
+         word-break: break-all;
+
+}
+.tareaBorrada form input[type="submit"] {
+    width: 40%;
+    border-radius: 5px;
+    padding:1%;
+    background-color: #ade5a0;
+    color: #0ea800;
+    border: 1px solid #4fd16b;
+    margin-top: 1%;
+    cursor: pointer;
+}
+
+.lista {
+   width: 25%;
+    margin-left: 38%;
+    margin-top: 2%;
+    padding: 1%;
+    background-color: #e0f7e0;
+    border: 2px solid #4caf50;
+    border-radius: 5px;
+}
+.lista h1 {
+    text-align: center;
+    color: #226408;
+}
+.lista form input[type="submit"] {
+    width: 40%;
+    border-radius: 5px;
+    background-color: #d5fdd8;
+    color: #226408;
+    border: 1px solid #4caf50;
+    margin-top: 1%;
+    cursor: pointer;
+}
+
+
+.listasHome form input[type="submit"] {
+  width:8%;
+}
+.lista form input[type="submit"] {
+  width:40%;
+}
+.listasHome form input[type="text"] {
+padding:0.5%;}
